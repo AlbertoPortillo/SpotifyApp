@@ -13,10 +13,9 @@ type Props ={
 }
 
 export default function WebViewToken({ onChangeLink }: Props) {
-    const [reponseSpotify, setResponseSpotify] = React.useState(null)    
     return (
         <WebView 
-            source={{ uri: `https://accounts.spotify.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&state=${state}`}} 
+            source={{ uri: `https://accounts.spotify.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=token&scope=${scope}&state=${state}`}} 
             onNavigationStateChange={onChangeLink}
         />
     )

@@ -4,8 +4,6 @@ import { View, Text, TextInput, NativeSyntheticEvent, TextInputChangeEventData }
 import UserContext from '../context/UserContext'
 import Button from './items/Button'
 import {  WebViewNavigation } from 'react-native-webview';
-import { CommonActions } from '@react-navigation/native';
-
 import WebViewToken from './WebViewToken'
 
 type Props = {
@@ -16,7 +14,7 @@ export default function LoginScreen({navigation}:Props) {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [auth, setAuth] = React.useState(false);
-    const {getToken} = React.useContext(UserContext)
+    const {setUsuario} = React.useContext(UserContext)
 
     var __style = {
         button:{button_fondo: style.main_login_button_fondo, button_texto: style.main_login_button_texto,  button_fondo_color: style.button_background_white },
@@ -29,41 +27,18 @@ export default function LoginScreen({navigation}:Props) {
     }
 
     const onLinkChanged = (e: NativeSyntheticEvent<WebViewNavigation>): void => {
-        var code = e.url.indexOf('code=')
-        var codefin = e.url.indexOf('&')
-        var code_full = e.url.slice(code+5, codefin)
-        console.log('code', code_full, code, codefin)
-
-        if(code){
+        var success = e.url.indexOf('callback?#access_token=')
+        
+        if(success){
+            var code = e.url.indexOf('token=')
+            var codefin = e.url.indexOf('&')
+            var code_full = e.url.slice(code+6, codefin)
+            console.log('code', e, code, codefin, code_full)
             setAuth(!auth)
-            getToken(code_full)
-            // navigation.navigate('Menu')
+            setUsuario(code_full)
+            navigation.navigate('Menu')
         }
     }
-
-    React.useEffect(() => {
-        isLogged()
-    },[])
-
-    const isLogged = async () => {
-        try {
-            const usuario = await getUsuario()
-            if(usuario != null){
-                navigation.dispatch(
-                    CommonActions.reset({
-                    index: 0,
-                    key:null,
-                    routes: [
-                        { name: 'Home' }
-                    ],
-                    })
-                );
-            }
-          } catch (e) {
-            console.log(e)
-          }
-    }
-
     return (
         <>
         {
@@ -73,7 +48,7 @@ export default function LoginScreen({navigation}:Props) {
                     <Button active={false} title='Iniciar Sesion' onPress={() => clickButton()} style={__style.button} />
                 </View>
                 :<WebViewToken onChangeLink={onLinkChanged} />   
-        }
+        }   
         </>
     )
 }

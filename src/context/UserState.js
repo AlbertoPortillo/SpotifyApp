@@ -37,27 +37,6 @@ const UserState = (props) =>  {
             return null;
         }
     }
-
-    const getToken = async (code) => {
-        try{
-            const body = new FormData()
-            body.append('code',code)
-            body.append('redirect_uri', redirect_uri)
-            body.append('grant_type','authorization_code')
-            var config = {
-                method: 'POST',
-                headers: {'Authorization': 'Basic ' + (client_id + ':' + client_secret).toString('base64')},
-                body:body,
-                json: true
-            }
-            const request = await axios('https://accounts.spotify.com/api/token', config);
-            const data = await request
-            console.log('getToken no error', data)
-        }catch(e){
-            console.log('getToken', e)
-            return null;
-        }
-    }
     
     return(
         <UserContext.Provider
@@ -65,7 +44,6 @@ const UserState = (props) =>  {
             user:state.user,
             getUsuario,
             setUsuario,
-            getToken
         }}>
         {props.children}
     </UserContext.Provider>
