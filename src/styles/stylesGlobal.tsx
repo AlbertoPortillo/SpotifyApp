@@ -74,5 +74,8 @@ export const style = StyleSheet.create({
     header_main: { flexDirection: 'row', width: '100%', height: '7%', justifyContent: 'center', alignItems:'center', paddingVertical: '1%'},
     header_touchableOpacity: {width: '10%', height: '70%',marginVertical: '15%', alignSelf: 'center'},
     header_arrowImg: {tintColor:secundario, transform: [{ rotateZ: "180deg" }], width: '100%', height: '100%', alignSelf: 'center'},
-    header_textTitle: { color: secundario, width: '90%', textAlign: 'center', fontSize: TITULO_LABEL }
+    header_textTitle: { color: secundario, width: '90%', textAlign: 'center', fontSize: TITULO_LABEL },
+    card_touchableOpacity: { width: '42%', height: '25%', borderRadius: 10, marginHorizontal: '2%', marginVertical: '5%' },
+    card_justifyContent:{width: '100%', height: '100%', justifyContent:'center', alignItems: 'center'},
+    card_text: { color: secundario, fontSize: TITULO_LABEL }
 })  

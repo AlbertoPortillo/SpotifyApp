@@ -4,7 +4,7 @@ import React from 'react'
 type Props={
   navigation: {navigate:any, dispatch: any, goBack: any};
   title: string;
-  goBack: boolean;
+  goBack?: boolean;
 }
 export default function Header({navigation, title, goBack=false}:Props) { 
 
