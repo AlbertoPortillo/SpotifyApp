@@ -26,6 +26,9 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         paddingTop: '10%'
     },
+    main_screen:{
+        alignItems: 'center',
+    },
     main_login_inputs:{
         width: '100%',
         height: '50%',
@@ -67,5 +70,9 @@ export const style = StyleSheet.create({
         fontSize: FONT_BACK_LABEL,
     },
     button_background_white:{backgroundColor: secundario},
-    button_background_gray:{backgroundColor: inputs_color}
-})
+    button_background_gray:{backgroundColor: inputs_color},
+    header_main: { flexDirection: 'row', width: '100%', height: '7%', justifyContent: 'center', alignItems:'center', paddingVertical: '1%'},
+    header_touchableOpacity: {width: '10%', height: '70%',marginVertical: '15%', alignSelf: 'center'},
+    header_arrowImg: {tintColor:secundario, transform: [{ rotateZ: "180deg" }], width: '100%', height: '100%', alignSelf: 'center'},
+    header_textTitle: { color: secundario, width: '90%', textAlign: 'center', fontSize: TITULO_LABEL }
+})  
