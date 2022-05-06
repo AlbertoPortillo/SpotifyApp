@@ -31,7 +31,7 @@ export const style = StyleSheet.create({
     },
     main_login_inputs:{
         width: '100%',
-        height: '50%',
+        height: '100%',
         marginHorizontal: '10%',
         borderRadius: 10,
         backgroundColor: inputs_color,
@@ -39,9 +39,9 @@ export const style = StyleSheet.create({
     main_login_inputs_box: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
-        height: '15%',
-        paddingHorizontal: '10%',
+        width: '75%',
+        height: '100%',
+        paddingHorizontal: '5%',
         backgroundColor: principal,
         marginBottom: '5%'
     },
@@ -75,7 +75,11 @@ export const style = StyleSheet.create({
     header_touchableOpacity: {width: '10%', height: '70%',marginVertical: '15%', alignSelf: 'center'},
     header_arrowImg: {tintColor:secundario, transform: [{ rotateZ: "180deg" }], width: '100%', height: '100%', alignSelf: 'center'},
     header_textTitle: { color: secundario, width: '90%', textAlign: 'center', fontSize: TITULO_LABEL },
-    card_touchableOpacity: { width: '42%', height: '25%', borderRadius: 10, marginHorizontal: '2%', marginVertical: '5%' },
+    card_touchableOpacity: { width: '46%', height: '25%', borderRadius: 10, marginHorizontal: '2%', marginVertical: '5%' },
     card_justifyContent:{width: '100%', height: '100%', justifyContent:'center', alignItems: 'center'},
-    card_text: { color: secundario, fontSize: TITULO_LABEL }
+    card_text: { color: secundario, fontSize: TITULO_LABEL, textShadowColor: 'rgba(0, 0, 0, 0.75)', textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10 },
+    disconnect_img: { width: '50%', height: '30%', borderRadius: 100, backgroundColor: 'white' },
+    disconnect_title: { color: 'white', fontSize: 40 },
+    disconnect_box: {marginTop: '10%', justifyContent: 'center', alignItems:'center', width: '100%' },
+    disconnect_text_body: { color: 'white', fontSize: 20, width: '70%', textAlign: 'center', marginTop: '5%' }
 })  

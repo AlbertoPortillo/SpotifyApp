@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TextInput, Text, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
 
 type Props ={
-    title: string;
+    title?: string;
     onText: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
     placeholder: string;
     style: { title?: object, textInput: object, boxTextInput: object };

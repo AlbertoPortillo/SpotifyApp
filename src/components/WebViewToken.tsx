@@ -3,13 +3,12 @@ import { NativeSyntheticEvent } from 'react-native'
 import { WebView, WebViewNavigation } from 'react-native-webview';
 
 var client_id = '4b50f832cc374ca29901df6f4df73c46';
-var client_secret = 'f94f529e173345c3870b41ed15de4b77';
-var redirect_uri = 'http://localhost:8888/callback';
+var redirect_uri = 'https://example.com/callback';
 var state = Math.random().toString(36).substring(2,7);
 var scope = 'user-read-private user-read-email';
 
 type Props ={
-    onChangeLink: (e: NativeSyntheticEvent<WebViewNavigation>) => void;
+    onChangeLink: (e: WebViewNavigation) => void;
 }
 
 export default function WebViewToken({ onChangeLink }: Props) {

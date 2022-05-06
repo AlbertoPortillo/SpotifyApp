@@ -4,10 +4,12 @@ import { View, Text, TextInput, NativeSyntheticEvent, TextInputChangeEventData }
 import UserContext from '../context/UserContext'
 import Button from './items/Button'
 import {  WebViewNavigation } from 'react-native-webview';
+import { Api } from '../core/Api/Conexiones'
 import WebViewToken from './WebViewToken'
+import NetInfo from "@react-native-community/netinfo";
 
 type Props = {
-    navigation: {navigate:any, dispatch: any}
+    navigation: {navigate:any, reset: any}
 }
 
 export default function LoginScreen({navigation}:Props) {
@@ -26,18 +28,33 @@ export default function LoginScreen({navigation}:Props) {
         console.log('Boton presionado', username, password, Date.now())
     }
 
-    const onLinkChanged = (e: NativeSyntheticEvent<WebViewNavigation>): void => {
-        var success = e.url.indexOf('callback?#access_token=')
+    React.useEffect(() => {
+        const removeNetInfoSubscription = NetInfo.addEventListener((state)=>{
+          const offline = !(state.isConnected && state.isInternetReachable);
+          if(offline){
+            navigation.navigate('Disconnect');
+          }
+        });
         
-        if(success){
+        return () => removeNetInfoSubscription();
+    }, []);
+
+    const onLinkChanged = (e: WebViewNavigation): void => {
+        var success = e.url.indexOf('#access_token=')
+        console.log('token', success, e)
+        if(success > 0){
             var code = e.url.indexOf('token=')
             var codefin = e.url.indexOf('&')
             var code_full = e.url.slice(code+6, codefin)
-            console.log('code', e, code, codefin, code_full)
             setAuth(!auth)
             setUsuario(code_full)
-            navigation.navigate('Menu')
+            Api.defaults.headers.common['Authorization'] = 'Bearer '+code_full;
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Menu' }],
+            })
         }
+     
     }
     return (
         <>

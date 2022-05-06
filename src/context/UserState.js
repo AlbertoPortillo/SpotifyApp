@@ -15,7 +15,7 @@ const UserState = (props) =>  {
         user:null,
     }
 
-    const [state, dispatch] = useReducer(UserReducer,initialState);
+    const [state, dispatch] = useReducer(UserReducer, initialState);
 
     const setUsuario = (datos) => {
         dispatch({

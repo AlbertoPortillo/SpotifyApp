@@ -2,7 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { style } from '../../styles/stylesGlobal';
 import React from 'react'
 type Props={
-  navigation: {navigate:any, dispatch: any, goBack: any};
+  navigation: {navigate:any, goBack: any};
   title: string;
   goBack?: boolean;
 }
