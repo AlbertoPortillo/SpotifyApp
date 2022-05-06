@@ -7,7 +7,7 @@ import NetInfo from "@react-native-community/netinfo";
 import { style } from '../styles/stylesGlobal';
 
 type Props = {
-    navigation: {navigate:any}
+    navigation: {navigate:any, reset: any}
 
 };
 
@@ -17,9 +17,15 @@ const Disconneted = (props: Props) => {
         const removeNetInfoSubscription = NetInfo.addEventListener((state)=>{
           const offline = !(state.isConnected && state.isInternetReachable);
           if(!offline && user){
-            props.navigation.navigate('Menu');
+            props.navigation.reset({
+                index: 0,
+                routes: [{ name: 'Menu' }],
+            })
           }else if(!offline && !user){
-            props.navigation.navigate('Login');
+            props.navigation.reset({
+                index: 0,
+                routes: [{ name: 'Login' }],
+            })
           }
         });
         return () => removeNetInfoSubscription();

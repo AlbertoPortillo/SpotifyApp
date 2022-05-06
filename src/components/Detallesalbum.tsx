@@ -2,12 +2,14 @@ import React from 'react'
 
 import { View, FlatList, Image, Text } from 'react-native'
 import Header from './items/Header';
+import NetInfo from "@react-native-community/netinfo";
+
 import { getAlbumID } from '../core/presentation/AlbumPresenter';
 import { style } from '../styles/stylesGlobal';
 
 type Props = {
     route: {name: string, params: any};
-    navigation: {navigate:any, goBack: any};
+    navigation: {navigate:any, goBack: any, reset: any};
 }
 
 const Detallesalbum = ({navigation, route}: Props) => {
@@ -23,7 +25,18 @@ const Detallesalbum = ({navigation, route}: Props) => {
         setAlbum(album)
     }
     
-
+    React.useEffect(() => {
+        const removeNetInfoSubscription = NetInfo.addEventListener((state)=>{
+          const offline = !(state.isConnected && state.isInternetReachable);
+          if(offline){
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Disconnect' }],
+            });
+          }
+        });
+        return () => removeNetInfoSubscription();
+    }, []);
     return (
         <View style={[style.main_background, style.main_screen]}>
             <Header navigation={navigation} title='Detalles del Album' goBack={true} />
@@ -33,7 +46,7 @@ const Detallesalbum = ({navigation, route}: Props) => {
                     style={{ width: '100%', height: '60%' }}
                     resizeMode='contain'
                 />
-
+                <Text style={{width: '100%', color: 'white', fontSize: 30, marginBottom: 10}} >Canciones:</Text>
                 <FlatList
                     style={{ height: '35%' }}
                     data={album?.tracks?.items}

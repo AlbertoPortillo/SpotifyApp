@@ -32,7 +32,10 @@ export default function LoginScreen({navigation}:Props) {
         const removeNetInfoSubscription = NetInfo.addEventListener((state)=>{
           const offline = !(state.isConnected && state.isInternetReachable);
           if(offline){
-            navigation.navigate('Disconnect');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Disconnect' }],
+            });
           }
         });
         

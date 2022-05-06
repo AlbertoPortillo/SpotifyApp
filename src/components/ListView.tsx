@@ -1,16 +1,17 @@
 import React from 'react';
 import { NativeSyntheticEvent, Pressable, Text, TextInputChangeEventData, View, FlatList } from 'react-native';
 import {getSampleAlbumData} from '../core/presentation/AlbumPresenter';
+import { getSampleArtistData } from '../core/presentation/ArtistaPresenter';
 import { style } from '../styles/stylesGlobal';
 
-import { Album } from '../core/data/Album';
-
+import NetInfo from "@react-native-community/netinfo";
+import CardArtist from './items/CardArtist';
 import Cardalbum from './items/Cardalbum';
 import Header from './items/Header';
 import Input from './items/Input';
 
 type Props = {
-    navigation: {navigate:any, goBack: any};
+    navigation: {navigate:any, goBack: any, push: any, reset: any};
     route: {name: string, params: any}
 }
 
@@ -25,20 +26,31 @@ export default function ListView({navigation, route}:Props) {
     const getSampleAlbumDataHandler = async () => {
         if(route.name == "Artistas"){ 
             if(find){
-                const album = await getSampleAlbumData(find);
-                setList(album)
-                console.log(album)
+                const artist = await getSampleArtistData(find);
+                setList(artist)
+                console.log(artist)
             }
         }else if(route.name == "Albumes"){
             if(find){
                 const album = await getSampleAlbumData(find);
                 setList(album)
-                console.log(album)
             }
         }
     };
 
-    
+    React.useEffect(() => {
+        const removeNetInfoSubscription = NetInfo.addEventListener((state)=>{
+          const offline = !(state.isConnected && state.isInternetReachable);
+          if(offline){
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Disconnect' }],
+            });
+          }
+        });
+        
+        return () => removeNetInfoSubscription();
+    }, []);
 
     return (
         <View style={[style.main_background, style.main_screen]}>
@@ -52,7 +64,7 @@ export default function ListView({navigation, route}:Props) {
             <Text>ListView</Text>
             <FlatList
                 data={list}
-                renderItem={({item})=> route.name == "Albumes" ?<Cardalbum props={item} navigation={navigation} /> :<></>}
+                renderItem={({item})=> route.name == "Albumes" ?<Cardalbum props={item} navigation={navigation} /> :<CardArtist props={item} navigation={navigation} />}
             />
         </View>
     )

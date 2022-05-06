@@ -1,5 +1,6 @@
 import { Artista } from "../data/Artistas";
 
 export interface ArtistaRepository {
-    getArtista() : Artista;
+    getArtistas(query: string) : Artista;
+    ArtistaByID(id: string) : Artista;
 }

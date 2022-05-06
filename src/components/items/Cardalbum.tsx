@@ -2,14 +2,14 @@ import React from 'react'
 import { Image, Pressable, Text, View } from 'react-native'
 
 type Props = {
-    navigation: {navigate:any, goBack: any};
+    navigation: {navigate:any, goBack: any, push: any};
     props: {name: string, id: string, artists: Array<Object>, images: Array<Object>}
 }
 
 const Cardalbum = ({props, navigation}: Props) => {
 
     const handleclick = () => {
-        navigation.navigate('AlbumesDetalles', {id: props.id})
+        navigation.push('AlbumesDetalles', {id: props.id})
     }
 
     return (

@@ -13,7 +13,7 @@ import { NavigationContainer, useNavigation  } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import UserState from './src/context/UserState';
-
+import Detallesartista from './src/components/ArtistaDetalles';
 import Detallesalbum from './src/components/Detallesalbum';
 import ListView from './src/components/ListView';
 import LoginScreen from './src/components/LoginScreen';
@@ -34,6 +34,7 @@ const App = () => {
             <Stack.Screen name="Albumes" component={ListView} />
             <Stack.Screen name="Artistas" component={ListView} />
             <Stack.Screen name="AlbumesDetalles" component={Detallesalbum} />
+            <Stack.Screen name="ArtistaDetalles" component={Detallesartista} />
             <Stack.Screen name="Disconnect" component={Disconneted} />
           </Stack.Navigator>
         </NavigationContainer>
